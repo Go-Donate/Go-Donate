@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/Header";
+import NothingHere from "../../components/NothingHere";
 import Select from "../../components/Select";
 import { iPosts } from "../../providers/@types";
 import { PostContext } from "../../providers/PostContext";
@@ -14,10 +15,6 @@ const PagePublic = () => {
     const postFiltered = posts.filter(post => post.state === value)
     setFilteredPost(postFiltered)
   }
-
-  // useEffect(() => {
-  //   setFilteredPost(posts.filter(item => item.state.toLowerCase().includes(search.toLowerCase())))
-  // }, [posts, search])
 
   useEffect(() => {
     const getCompanies = async () => {
@@ -34,37 +31,6 @@ const PagePublic = () => {
     }
     getCompanies()
   }, [])
-
-  const states = [
-    { name: 'Acre', sigla: 'AC' },
-    { name: 'Alagoas', sigla: 'AL' },
-    { name: 'Amapá', sigla: 'AP' },
-    { name: 'Amazonas', sigla: 'AM' },
-    { name: 'Bahia', sigla: 'BA' },
-    { name: 'Ceará', sigla: 'CE' },
-    { name: 'Distrito Federal', sigla: 'DF' },
-    { name: 'Espírito Santo', sigla: 'ES' },
-    { name: 'Goiás', sigla: 'GO' },
-    { name: 'Maranhão', sigla: 'MA' },
-    { name: 'Mato Grosso', sigla: 'MT' },
-    { name: 'Mato Grosso do Sul', sigla: 'MS' },
-    { name: 'Minas Gerais', sigla: 'MG' },
-    { name: 'Pará', sigla: 'PA' },
-    { name: 'Paraíba', sigla: 'PB' },
-    { name: 'Paraná', sigla: 'PR' },
-    { name: 'Pernambuco', sigla: 'PE' },
-    { name: 'Piauí', sigla: 'PI' },
-    { name: 'Rio de Janeiro', sigla: 'RJ' },
-    { name: 'Rio Grande do Norte', sigla: 'RN' },
-    { name: 'Rio Grande do Sul', sigla: 'RS' },
-    { name: 'Rondônia', sigla: 'RO' },
-    { name: 'Roraima', sigla: 'RR' },
-    { name: 'Santa Catarina', sigla: 'SC' },
-    { name: 'São Paulo', sigla: 'SP' },
-    { name: 'Sergipe', sigla: 'SE' },
-    { name: 'Tocantins', sigla: 'TO' }
-  ];
-  
 
   return (
     <>
@@ -111,6 +77,8 @@ const PagePublic = () => {
                 ))
           
               :
+
+              posts.length > 0 ?
               
               posts.map((item) => (
                 <CardPublic key={item.id}>
@@ -129,7 +97,8 @@ const PagePublic = () => {
                       <span>{item.type}</span>
                     </InfoEvent>
                 </CardPublic>
-              ))
+              )) :
+                <NothingHere />
             }
 
           </ListCardContainer>
