@@ -15,9 +15,10 @@ export const CardPostuser = ({ post }: iCardPostsUser) => {
     const alreadyParticipated = donations.some(
       (donation) => donation.fundraisingId === post.id
     );
+
     if (alreadyParticipated) {
-      toast.warning("Você já está participando deste evento!");
-      return;
+      toast.warning("Você já está participando deste evento")
+      return "";
     }
 
     const data = {
@@ -40,7 +41,10 @@ export const CardPostuser = ({ post }: iCardPostsUser) => {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    toast.success("Evento adicionado as suas participações");
     setDonations([...donations, response.data]);
+      
   };
 
   return (
@@ -66,9 +70,6 @@ export const CardPostuser = ({ post }: iCardPostsUser) => {
           onClick={addFundraisingUser}
           color="white"
           background="primary-color"
-          disabled={donations.some(
-            (donation) => donation.fundraisingId === post.id
-          )}
         >
           Participar do evento
         </ButtonMain>
