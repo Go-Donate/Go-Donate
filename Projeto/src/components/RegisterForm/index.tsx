@@ -10,6 +10,7 @@ import * as S from "./style";
 import { Link } from "react-router-dom";
 import Charity from "../../assets/Charity-rafiki.svg";
 import Logo from "../../assets/Logo.svg"
+import Loading from "../Loading";
 
 const schema = yup.object({
   name: yup.string().required("Nome é obrigatório"),
@@ -45,7 +46,7 @@ const schema = yup.object({
 });
 
 const RegisterForm = () => {
-  const { userRegister } = useContext(UserContext);
+  const { userRegister, loading } = useContext(UserContext);
 
   const {
     register,
@@ -148,7 +149,7 @@ const RegisterForm = () => {
             leftIcon={<FiImage />}
           />
 
-          <S.ButtonCadastrar type="submit">Cadastrar</S.ButtonCadastrar>
+          <S.ButtonCadastrar type="submit" disabled={loading}>{loading ? <Loading /> : <span>Cadastrar</span>}</S.ButtonCadastrar>
 
           <S.LinkButton to="/login">Login</S.LinkButton>
         </S.FormRegister>

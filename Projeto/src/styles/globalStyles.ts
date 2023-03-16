@@ -1,6 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
+
 const GlobalStyle = createGlobalStyle`
+
   :root {
     --primary-color: #12876E;
     --secondary-color: #0D3042;
@@ -22,7 +24,6 @@ const GlobalStyle = createGlobalStyle`
     --font-mobile: 0.875rem;
   }
  
-
   body {
 
     h1 {
@@ -43,9 +44,6 @@ const GlobalStyle = createGlobalStyle`
  
     min-height: max-content;
   }
-
-
-  
 `;
 
 export default GlobalStyle;

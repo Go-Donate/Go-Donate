@@ -7,9 +7,10 @@ import Input from "../Input";
 import * as S from "./style";
 import RegisterImg from '../../assets/imgregister.svg'
 import Logo from '../../assets/Logo.svg'
+import Loading from "../Loading";
 
 const LoginForm = () => {
-  const { userLogin } = useContext(UserContext);
+  const { userLogin, loading, setLoading } = useContext(UserContext);
 
   const { register, handleSubmit } = useForm<ILoginFormValues>();
 
@@ -37,7 +38,7 @@ const LoginForm = () => {
             leftIcon={<FiLock />}
           />
 
-          <S.ButtonLogin type="submit">Login</S.ButtonLogin>
+          <S.ButtonLogin type="submit" >{!loading ? <span>Login</span> : <Loading />}</S.ButtonLogin>
 
           <S.LinkCreateAccount to="/register">Cadastro</S.LinkCreateAccount>
         </S.FormLogin>

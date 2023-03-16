@@ -71,7 +71,7 @@ const Donation = () => {
       <Navbar mode="private" />
       <MainDonationContainer>
         <DonateInputSearch>
-          <h2>Campanhas de doaçõesss</h2>
+          <h2>Campanhas de doações</h2>
           <div>
             <button
               onClick={() => {

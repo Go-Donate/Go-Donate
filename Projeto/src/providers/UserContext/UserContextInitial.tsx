@@ -2,6 +2,7 @@ import { isAxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Loadingg } from "../../components/Loading/style";
 import { api } from "../../services/api";
 import {
   IDefaultProviderProps,
@@ -58,6 +59,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
           ? toast.error("Senha ou email inválidos")
           : toast.error("Ops! Algo deu errado");
       }
+    } finally {
+      setLoading(false)
     }
   };
 

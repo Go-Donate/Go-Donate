@@ -33,12 +33,12 @@ export const ContainerSideForm = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 2rem;
   margin: auto auto;
 
   > h2 {
     color: white;
-    font-size: 26px;
+    font-size: 1rem;
   }
 
   @media (min-width: 1024px) {
@@ -55,12 +55,15 @@ export const FormLogin = styled.form`
 `;
 
 export const ButtonLogin = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   background-color: var(--primary-color);
   padding: 16px 0;
   border-radius: 8px;
   color: white;
 
-  font-family: "Roboto Slab";
   font-weight: 500;
   font-size: 16px;
 
@@ -83,7 +86,7 @@ export const LinkCreateAccount = styled(Link)`
   border-radius: 8px;
   color: white;
 
-  font-family: "Roboto Slab";
+
   font-weight: 500;
   font-size: .9rem;
 
