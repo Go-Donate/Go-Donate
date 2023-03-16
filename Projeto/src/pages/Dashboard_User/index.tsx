@@ -11,6 +11,7 @@ import EventUserContainer, {
 import { PostContext } from "../../providers/PostContext";
 import CardPerfilMobile from "../../components/Cards/Perfil/Mobile";
 import NothingHere from "../../components/NothingHere";
+import { toast } from "react-toastify";
 
 const PageUser = () => {
   const { fundraising, setFundraising, setDonations } = useContext(PostContext);
@@ -32,12 +33,14 @@ const PageUser = () => {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
+        // toast.success('Você está participando do evento!')
 
         setDonations(responseDonation.data.donation);
         setFundraising(response.data);
       } catch (error) {
         if (isAxiosError(error)) {
           console.log(error.message);
+          toast.warn('Você ja está participando!')
         }
 
         console.log(error);

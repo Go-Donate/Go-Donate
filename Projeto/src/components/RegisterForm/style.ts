@@ -46,18 +46,17 @@ export const ContainerSideForm = styled.div`
   align-items: center;
   justify-content: center;
   gap: 16px;
-  /* margin: auto auto; */
 
   > h2 {
     color: white;
-    font-size: 1.3rem;
+    font-size: 1rem;
   }
 `;
 
 export const FormRegister = styled.form`
   display: flex;
   flex-direction: column;
-  gap: .7rem;
+  gap: .5rem;
 
   select {
     background-color: var(--inputs-color);
@@ -76,14 +75,19 @@ export const FormRegister = styled.form`
 `;
 
 export const ButtonCadastrar = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   background-color: var(--gray-20);
   padding: 16px 0;
   border-radius: 8px;
   color: white;
 
-  font-family: "Roboto Slab";
   font-weight: 500;
-  font-size: .9rem;
+   span {
+     font-size: .9rem;
+   }
 
   transition: .3s ease;
 
@@ -104,7 +108,6 @@ export const LinkButton = styled(Link)`
   border-radius: 8px;
   color: white;
 
-  font-family: "Roboto Slab";
   font-weight: 500;
   font-size: .9rem;
 

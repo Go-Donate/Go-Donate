@@ -2,6 +2,7 @@ import { isAxiosError } from "axios";
 import { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Loadingg } from "../../components/Loading/style";
 import { api } from "../../services/api";
 import {
   IDefaultProviderProps,
@@ -99,6 +100,8 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
               closeOnClick: true,
             });
       }
+    } finally {
+      setLoading(false)
     }
   };
 
