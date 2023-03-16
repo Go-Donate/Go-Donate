@@ -21,43 +21,84 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const navigate = useNavigate();
 
   const userRegister = async (formData: IRegisterFormValues) => {
+    const idToastLoading = toast.loading("Por favor aguarde!");
+
     try {
       setLoading(true);
-      const response = await toast.promise(api.post("register", formData), {
-        pending: "Carregando...",
-        success: "Cadastro realizado",
-        error: "Ops! algo deu errado!",
+      const response = await api.post("register", formData);
+
+      toast.update(idToastLoading, {
+        render: "Cadrasto realizado com sucesso.",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
       });
-      console.log(response);
+
       localStorage.setItem("@TOKEN", response.data.accessToken);
       navigate("/login");
     } catch (error) {
-      console.log(error);
+      if (isAxiosError(error)) {
+        console.log(error);
+        error.response?.data == "Email already exists"
+          ? toast.update(idToastLoading, {
+              render: "Esse email já está cadrastado!",
+              type: "warning",
+              isLoading: false,
+              autoClose: 3000,
+              closeOnClick: true,
+            })
+          : toast.update(idToastLoading, {
+              render: "Ops! Algo deu errado.",
+              type: "error",
+              isLoading: false,
+              autoClose: 3000,
+              closeOnClick: true,
+            });
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const userLogin = async (formData: ILoginFormValues) => {
+    const idToastLoading = toast.loading("Por favor aguarde!");
+
     try {
       setLoading(true);
-      const response = await toast.promise(api.post("login", formData), {
-        pending: "Carregando...",
-        success: "Login realizado com sucesso",
-      });
+      const response = await api.post("login", formData);
       const { isCompany } = response.data.user;
       setUser(response.data.user);
+
+      toast.update(idToastLoading, {
+        render: "Login realizado com sucesso.",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
+      });
 
       localStorage.setItem("@TOKEN", response.data.accessToken);
       localStorage.setItem("@UserId", response.data.user.id);
 
       isCompany ? navigate("/company") : navigate("/user");
     } catch (error) {
-      console.log(error);
       if (isAxiosError(error)) {
-        error.response?.data == "Incorrect password"
-          ? toast.error("Senha ou email inválidos")
-          : toast.error("Ops! Algo deu errado");
+        error.response?.data == "Incorrect password" || "Cannot find user"
+          ? toast.update(idToastLoading, {
+              render: "Senha ou email errado!",
+              type: "warning",
+              isLoading: false,
+              autoClose: 3000,
+              closeOnClick: true,
+            })
+          : toast.update(idToastLoading, {
+              render: "Ops! Algo deu errado.",
+              type: "error",
+              isLoading: false,
+              autoClose: 3000,
+              closeOnClick: true,
+            });
       }
     } finally {
       setLoading(false)
@@ -110,6 +151,7 @@ export const UserProvider = ({ children }: IDefaultProviderProps) => {
   const userLogout = () => {
     setUser(null);
     localStorage.clear();
+    toast.success(`Agradecemos e muito pela suas contribuições ${user?.name}`);
     navigate("/");
   };
 
